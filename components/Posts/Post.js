@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import axios from 'axios';
 
 const PostContainer = styled.div(() => ({
   width: '300px',
@@ -66,8 +67,14 @@ const NextButton = styled(Button)`
   top: 140px
 `;
 
+const userInformation = styled.div(() => ({
+  display: 'flex',
+  justifyContent: 'space-between'
+}));
+
 const Post = ({ post }) => {
   const carouselRef = useRef(null);
+  const [userInfo, setUserInfo] = useState({});
 
   const handleNextClick = () => {
     if (carouselRef.current) {
@@ -87,8 +94,32 @@ const Post = ({ post }) => {
     }
   };
 
+  const userNameFirstLetters = (name) =>{
+      name = name ? name.replace('Mrs. ', '') : "";
+      const nameList = name.split(" ");
+      const userNameInitiales = nameList.reduce((acc, name) => acc + name[0], "")
+      return userNameInitiales
+  }
+
+  const userId = post.userId;
+  useEffect(()=>{
+    axios.get(`/api/v1/users/${userId}`)
+    .then((res)=>{
+      setUserInfo(res.data)
+    })
+  }, [])
+
   return (
     <PostContainer>
+        <div style={{display: 'flex', margin: '5px'}}>
+          <div style={{backgroundColor: '#808080', borderRadius: '100%', padding: '12px', color: 'white', fontWeight: 'bold'}}>
+            {userNameFirstLetters(userInfo.name)}</div>
+          <div style={{lineHeight: '15px', marginTop: '10px', marginLeft: '5px'}}>
+            <div style={{fontWeight: 'bold'}}>{userInfo.name}</div>
+            <div style={{fontSize: '12px', fontWeight: '500'}}>{userInfo.email}</div>
+          </div>
+        </div>
+
       <CarouselContainer>
         <Carousel ref={carouselRef}>
           {post.images.map((image, index) => (
