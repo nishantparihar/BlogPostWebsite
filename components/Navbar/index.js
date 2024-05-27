@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const Navbar = styled('nav')(() => ({
+  
   backgroundColor: '#333',
   color: '#fff',
   width: '100%',
