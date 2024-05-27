@@ -60,8 +60,8 @@ export default function Posts() {
   return (
     <Container>
       <PostListContainer>
-        {posts.map(post => (
-          <Post post={post} />
+        {posts.map((post, ind) => (
+          <Post post={post} key={ind} />
         ))}
       </PostListContainer>
 

@@ -15,6 +15,7 @@ const CarouselContainer = styled.div(() => ({
 }));
 
 const Carousel = styled.div(() => ({
+  'pointer-events': 'none',
   display: 'flex',
   overflowX: 'scroll',
   scrollbarWidth: 'none',
