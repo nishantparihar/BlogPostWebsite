@@ -1,8 +1,12 @@
 import React from 'react';
+import Context from '../context/context';
+
 
 const App = ({ Component, pageProps }) => (
   <React.Fragment>
-    <Component {...pageProps} />
+    <Context>
+      <Component {...pageProps} />
+    </Context>
   </React.Fragment>
 );
 

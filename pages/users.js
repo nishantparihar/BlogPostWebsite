@@ -6,9 +6,11 @@ import UserList from '../components/UserList';
 export default function HomePage() {
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
+      style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh'}}
     >
-      <TopNavbar />
+      <div style={{position: 'sticky', top: '0', zIndex: '40'}}>
+          <TopNavbar />
+      </div>
       <div
         style={{
           margin: '60px 0px 20px',
